@@ -1,20 +1,25 @@
-import React from 'react'
-import { View, Text } from 'react-native-web'
-import CameraScreen from './app/screens/CameraScreen'
-import { BottomNav } from './app/navigation/BottomNav'
-import {NavigationContainer} from '@react-navigation/native'
-import { StatusBar } from 'react-native'
+import React from 'react';
+import { StatusBar, View, Text } from 'react-native'; // Importing from react-native
+import { NavigationContainer } from '@react-navigation/native';
+import { BottomNav } from './app/navigation/BottomNav';
+import { useFonts, Lato_700Bold } from '@expo-google-fonts/lato'; // Corrected import statement
 
 const App = () => {
-  return(
+  const [fontsLoaded] = useFonts({ // Correct usage of useFonts
+    Lato_700Bold,
+  });
 
-  <NavigationContainer>
-  
-  <BottomNav />
-  <StatusBar barStyle="dark-content" />
+  if (!fontsLoaded) {
+    return null; // Render nothing if fonts are not loaded
+  }
 
-  </NavigationContainer>
-  )
- }
+  return (
+    <NavigationContainer>
+      <BottomNav />
+      <StatusBar barStyle="dark-content" />
+    </NavigationContainer>
+  );
+};
 
-export default App
+export default App;
+
