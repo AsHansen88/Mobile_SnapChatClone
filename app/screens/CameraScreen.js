@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Camera } from 'expo-camera';
-import * as Permissions from 'expo-permissions';
+import { Camera, requestPermissionsAsync } from 'expo-camera';
 import { TouchableOpacity, View, Text, StyleSheet, Modal, Image } from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -30,7 +29,7 @@ const CameraScreen = () => {
 
     const allowPermission = async () => {
         try {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA);
+            const { status } = await requestPermissionsAsync();
             setAllowedCamera(status === 'granted');
         } catch (error) {
             console.log("error loading the camera");
@@ -48,7 +47,12 @@ const CameraScreen = () => {
                 console.log('error taking picture');
             }
         }
-    };
+    }
+
+    const closeImagePreview = () => {
+        setImagePreview(null)
+        setIsOpen(false)
+    }
 
     if (!allowedCamera) {
         return (
@@ -64,6 +68,12 @@ const CameraScreen = () => {
         return (
             <Modal animationType="fade" visible={isOpen} transparent={false}>
                 <Image source={{ uri: imagePreview }} style={{ height: "100%", width: "100%" }} />
+                <View style={styles.actionBottom}>
+                    <Ionicons name="send-outline" size={25} color={"#0e153a"} onPress={() => console.log('Send')}/>
+                </View>
+                <View style={styles.closeBtn}>
+                    <Ionicons name="close-circle-outline" size={38} color="#eee" onPress={closeImagePreview}/>
+                </View>
             </Modal>
         );
     }
@@ -77,7 +87,7 @@ const CameraScreen = () => {
                     <Ionicons name="settings-outline" style={styles.headerIcon} color="#eee" size={24} />
                 </View>
                 <View style={styles.sideItem}>
-                    <Ionicons name="camera-outline" style={styles.sideIcons} size={20} color="#eee" onPress={changeCameraType}/>
+                    <Ionicons name="camera-reverse-outline" style={styles.sideIcons} size={20} color="#eee" onPress={changeCameraType}/>
                     <Ionicons name="flash-outline" style={styles.sideIcons} size={20} color="#eee" onPress={changeFlashMode}/>
                     <Ionicons name="musical-notes-outline" style={styles.sideIcons} size={20} color="#eee" />
                 </View>
@@ -140,6 +150,23 @@ const styles = StyleSheet.create({
         width: 45,
         height: 45,
         marginVertical: 10
+     },
+     actionBottom: {
+        position: "absolute",
+        bottom: 20,
+        padding: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%"
+     },
+     sendBtn: {
+        backgroundColor: "yellow"
+     },
+     closeBtn: {
+        padding: 10,
+        position: "absolute",
+        top: 40
      }
 })
 

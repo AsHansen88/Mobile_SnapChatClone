@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
-const AppIcons = ({ AntName, IonName, style, color = '#000', size = 24, onPress }) => {
+const AppIcon = ({ AntName, IonName, style, color = '#000', size = 24, onPress }) => {
   return (
     <TouchableOpacity style={[styles.icon, style]} onPress={onPress}>
       {AntName && <AntDesign name={AntName} size={size} color={color} />}
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AppIcons;
+export default AppIcon;
