@@ -5,8 +5,8 @@ import { Chats } from "../chats/Chats";
 const ChatScreen = () => {
     // Example userData array
     const userData = [
-        { name: 'Alice', min: '5 min ago' },
-        { name: 'Bob', min: '10 min ago' },
+        { name: 'Anders', min: '5 min ago' },
+        { name: 'Carina', min: '10 min ago' },
         // ... other users
     ];
 
