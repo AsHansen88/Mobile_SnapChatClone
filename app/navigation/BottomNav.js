@@ -6,6 +6,7 @@ import ChatScreen from "../screens/ChatScreen";
 import MapScreen from "../screens/MapScreen";
 import LoginScreen from '../screens/LoginScreen';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +15,8 @@ export const BottomNav = () => {
         Map: "md-location-outline",
         Chat: "ios-chatbox-outline",
         Camera: "camera-outline",
-        Users: "people-outline" // Assuming you have an icon named "people-outline"
+        Users: "people-outline", // Assuming you have an icon named "people-outline"
+        Login: "sign-in"
     };
 
     return (
@@ -22,7 +24,9 @@ export const BottomNav = () => {
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ size, color }) => {
                     const iconName = icons[route.name];
-                    return <Ionicons name={iconName} size={size} color={color} />;
+                    return <Ionicons name={iconName} size={size} color={color} />,
+                           <FontAwesome name="sign-in" size={size} color={color} />
+                    ;
                 }
             })}
         >
