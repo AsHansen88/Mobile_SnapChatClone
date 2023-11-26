@@ -4,6 +4,7 @@ import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import ChatScreen from "../screens/ChatScreen";
 import MapScreen from "../screens/MapScreen";
+import LoginScreen from '../screens/LoginScreen';
 import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -25,6 +26,7 @@ export const BottomNav = () => {
                 }
             })}
         >
+            <Tab.Screen name="Login" component={LoginScreen} />
             <Tab.Screen name="Map" component={MapScreen} />
             <Tab.Screen name="Chat" component={ChatScreen} />
             <Tab.Screen name="Camera" component={CameraScreen} />
