@@ -7,6 +7,9 @@ const LoginScreen = () => {
 
     const ApiKey = "AIzaSyDTVhUc3zC_D_91SgNku2cqCWLrr-xrv18"; 
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
+    const urlSignUp = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="
+
+
 
     const [ EnteredEmail, setEnteredEmail ] = useState("Anders@a.dk")
     const [ EnteredPassword, setEnteredPassword ] = useState("123456")
@@ -26,6 +29,22 @@ const LoginScreen = () => {
         }
     }
 
+    async function Signup() {
+        try {
+            const response = await axios.post(urlSignUp + ApiKey, {
+                email: EnteredEmail,
+                password: EnteredPassword,
+                returnSecureToken: true
+            })
+           alert("Oprettet" + response.data.idToken); 
+
+        } catch (error) {
+
+            alert("Ikke oprettet" + error.response.data.error.errors[0].message);
+        }
+    }
+
+
     return (
         <View style={styles.container}>
         <Text>Login Screen</Text>
@@ -37,10 +56,27 @@ const LoginScreen = () => {
         onChangeText={newText => setEnteredPassword(newText)}
         value={EnteredPassword}
         />
-            <Button
+        
+        <Button
                 title='Log in'
                 onPress={login}
             />
+
+<TextInput 
+        onChangeText={newText => setEnteredEmail(newText)}
+        value={EnteredEmail}
+        />
+        <TextInput 
+        onChangeText={newText => setEnteredPassword(newText)}
+        value={EnteredPassword}
+        />
+        <Button
+                title='Sign Up'
+                onPress={Signup}
+            />
+
+
+            
         </View>
     )
 }
