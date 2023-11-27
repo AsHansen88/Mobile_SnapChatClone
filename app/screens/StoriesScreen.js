@@ -1,24 +1,23 @@
-import react from "react";
-import {Text, View, Button} from 'react-native'
+import React from 'react';
+import { Text, View, Button } from 'react-native';
+import { auth } from '../../firebase';
 
-const onLogout = () => {
-        firebase.auth().signOut()
-    }
+const StoriesScreen = ({ navigation }) => {
+    const handleLogout = async () => {
+        try {
+            await auth.signOut();
+            navigation.navigate('Login');
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
 
-const StoriesScreen = () => {
-
-    return(
-        <View style= {{flex: 1, justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "blue"}}>
+    return (
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "blue" }}>
             <Text>Story Screen</Text>
+            <Button title="Logout" onPress={handleLogout} />
         </View>
-    )
+    );
 }
 
-<Button name="Logout"
-onPress={() => onLogout()}
-    />
-
-
-export default StoriesScreen
+export default StoriesScreen;

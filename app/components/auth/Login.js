@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Button, TextInput } from 'react-native';
-import { auth, firestore } from '../../firebase'; 
+import { auth, firestore } from '../../../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
