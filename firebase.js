@@ -1,4 +1,9 @@
-import firebase from 'firebase';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { getStorage } from 'firebase/storage';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, collection, doc, setDoc, query, where, getDocs } from 'firebase/firestore';
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -10,12 +15,16 @@ const firebaseConfig = {
     appId: "1:47323077322:web:e912adf6ee04599bb03233",
     measurementId: "G-1THTXV5V4N"
   };
+/*
+  if(firebase.apps.length ===0)  {
+    firebase.initializeApp(firebaseConfig)
+  }
+*/
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+const storage = getStorage(app);
+const CreateUser = createUserWithEmailAndPassword(app);
+const SignIn = signInWithEmailAndPassword(app)
 
-  const firebaseapp = firebase.initializeapp(firebaseConfig)
-  const db = firebaseApp.firestore();
-  const auth = firebase.auth();
-  const storage = firebase.storage();
-  const provider = new firebase.auth.GoogleAuthProvider(); 
-
-  export { db, storage, auth, provider };
-  
+export { app, auth, firestore, storage, CreateUser, SignIn };

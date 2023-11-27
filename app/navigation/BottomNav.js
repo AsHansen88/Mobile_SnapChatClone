@@ -4,11 +4,12 @@ import CameraScreen from "../screens/CameraScreen";
 import StoriesScreen from "../screens/StoriesScreen";
 import ChatScreen from "../screens/ChatScreen";
 import MapScreen from "../screens/MapScreen";
-import LoginScreen from '../screens/LoginScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 const Tab = createBottomTabNavigator();
+
+
 
 export const BottomNav = () => {
     const icons = {
@@ -16,10 +17,11 @@ export const BottomNav = () => {
         Chat: "ios-chatbox-outline",
         Camera: "camera-outline",
         Users: "people-outline", // Assuming you have an icon named "people-outline"
-        Login: "sign-in"
+       
     };
 
     return (
+
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ size, color }) => {
@@ -30,12 +32,12 @@ export const BottomNav = () => {
                 }
             })}
         >
-            <Tab.Screen name="Login" component={LoginScreen} />
             <Tab.Screen name="Map" component={MapScreen} />
             <Tab.Screen name="Chat" component={ChatScreen} />
             <Tab.Screen name="Camera" component={CameraScreen} />
-            <Tab.Screen name="Users" component={StoriesScreen} />
+            <Tab.Screen name="Users" component={StoriesScreen} initialRouteName="Users" />
             
         </Tab.Navigator>
     );
 };
+

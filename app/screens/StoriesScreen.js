@@ -1,7 +1,12 @@
 import react from "react";
-import {Text, View} from 'react-native'
+import {Text, View, Button} from 'react-native'
+
+const onLogout = () => {
+        firebase.auth().signOut()
+    }
 
 const StoriesScreen = () => {
+
     return(
         <View style= {{flex: 1, justifyContent: "center",
             alignItems: "center",
@@ -10,5 +15,10 @@ const StoriesScreen = () => {
         </View>
     )
 }
+
+<Button name="Logout"
+onPress={() => onLogout()}
+    />
+
 
 export default StoriesScreen

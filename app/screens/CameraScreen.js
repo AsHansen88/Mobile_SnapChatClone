@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Camera, requestPermissionsAsync } from 'expo-camera';
+import { Camera, requestCameraPermissionsAsync } from 'expo-camera';
 import { TouchableOpacity, View, Text, StyleSheet, Modal, Image } from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -23,13 +23,14 @@ const CameraScreen = () => {
             : Camera.Constants.Type.back);
     };
 
+    
     useEffect(() => {
         allowPermission();
     }, []);
 
     const allowPermission = async () => {
         try {
-            const { status } = await requestPermissionsAsync();
+            const { status } = await requestCameraPermissionsAsync();
             setAllowedCamera(status === 'granted');
         } catch (error) {
             console.log("error loading the camera");
@@ -97,6 +98,7 @@ const CameraScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    
     notAllowed: {
         flex: 1,
         justifyContent: "center",
