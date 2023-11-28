@@ -10,10 +10,6 @@ import { Provider } from 'react-redux';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import rootReducer from './app/redux/reducers/index'; // Correct this import
 import thunk from 'redux-thunk';
-import MapScreen from './app/screens/MapScreen.js';
-import ChatScreen from './app/screens/ChatScreen.js';
-import CameraScreen from './app/screens/CameraScreen.js';
-import StoriesScreen from './app/screens/StoriesScreen.js';
 import { BottomNav } from './app/navigation/BottomNav.js';
 
 const store = configureStore({

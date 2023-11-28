@@ -1,35 +1,80 @@
-import React from "react";
-import { FlatList, Text, View, StyleSheet } from 'react-native';
-import { Chats } from "../chats/Chats";
+import React, { useEffect, useCallback, useState, useLayoutEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-elements';
+import { auth } from '../../firebase';
+import { GiftedChat } from 'react-native-gifted-chat';
 
-const ChatScreen = () => {
-    // Example userData array
-    const userData = [
-        { name: 'Anders', min: '5 min ago' },
-        { name: 'Carina', min: '10 min ago' },
-        // ... other users
-    ];
+const ChatScreen = ({ navigation }) => {
+    const [messages, setMessages] = useState([]);
+
+    const signOut = () => {
+        auth.signOut().then(() => {
+            navigation.replace("Login");
+        }).catch((error) => {
+            // Handle errors here, e.g., show a toast notification
+            console.log('Sign out error:', error);
+        });
+    }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <View style={{ marginLeft: 20 }}>
+                    <Avatar
+                        rounded
+                        source={{
+                            uri: auth?.currentUser?.photoURL,
+                        }}
+                    />
+                </View>
+            ),
+            headerRight: () => (
+                <TouchableOpacity 
+                    style={{ marginRight: 10 }}
+                    onPress={signOut}
+                >
+                    <Text>Logout</Text>
+                </TouchableOpacity>
+            )
+        });
+    }, [navigation]);
+
+    useEffect(() => {
+        setMessages([
+            // This is a sample message. Replace with your message fetching logic
+            {
+                _id: 1,
+                text: 'Hello developer',
+                createdAt: new Date(),
+                user: {
+                    _id: 2,
+                    name: 'React Native',
+                    avatar: 'https://placeimg.com/140/140/any',
+                },
+            },
+        ]);
+    }, []);
+
+    const onSend = useCallback((messages = []) => {
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
+    }, []);
 
     return (
-        <View>
-            <FlatList
-                data={userData}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item }) => <Chats name={item.name} timeAgo={item.min} />}
-                ItemSeparatorComponent={() => <View style={styles.divider} />}
-            />        
-        </View>
+        <GiftedChat
+            messages={messages}
+            showAvatarForEveryMessage={true}
+            onSend={messages => onSend(messages)}
+            user={{
+                _id: auth?.currentUser?.email,
+                name: auth?.currentUser?.displayName,
+                avatar: auth?.currentUser?.photoURL
+            }}
+        />
     );
-};
+}
 
-// Example styles
 const styles = StyleSheet.create({
-    divider: {
-        height: 1,
-        width: "100%",
-        backgroundColor: "#CED0CE",
-    },
-    // ... other styles if needed
+    // Define your styles here if needed
 });
 
 export default ChatScreen;

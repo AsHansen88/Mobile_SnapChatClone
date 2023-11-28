@@ -4,7 +4,10 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 export const Chats = ({ name, timeAgo }) => {
     return (
+
+
         <SafeAreaView>
+
             <TouchableOpacity style={styles.container}>
                 <View style={styles.contentContainer}>
                 <View style={styles.user}>
@@ -23,10 +26,13 @@ export const Chats = ({ name, timeAgo }) => {
                     </View>
                     </View>
                 </View>
-            </TouchableOpacity>
+           </TouchableOpacity>
+      
         </SafeAreaView>
     );
 };
+
+
 
 const styles = StyleSheet.create({
     container: {

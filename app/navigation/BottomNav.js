@@ -32,8 +32,8 @@ export const BottomNav = () => {
                 }
             })}
         >
-            <Tab.Screen name="Map" component={MapScreen} />
             <Tab.Screen name="Chat" component={ChatScreen} />
+            <Tab.Screen name="Map" component={MapScreen} />
             <Tab.Screen name="Camera" component={CameraScreen} />
             <Tab.Screen name="Users" component={StoriesScreen} initialRouteName="Users" />
             
