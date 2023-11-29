@@ -21,6 +21,7 @@
     "expo-camera": "~13.4.4",
     "expo-font": "~11.4.0",
     "expo-image-picker": "~14.3.2",
+    "expo-location": "^16.3.0",
     "expo-navigation-bar": "~2.3.0",
     "expo-permissions": "~14.2.1",
     "expo-status-bar": "~1.6.0",

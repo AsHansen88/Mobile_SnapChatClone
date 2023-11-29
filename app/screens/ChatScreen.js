@@ -68,8 +68,11 @@ const ChatScreen = ({ navigation }) => {
                 _id: auth?.currentUser?.email,
                 name: auth?.currentUser?.displayName,
                 avatar: auth?.currentUser?.photoURL
-            }}
+                          
+        }}
         />
+        
+        
     );
 }
 
