@@ -28,17 +28,19 @@ export default function CameraScreen({ navigation }) {
     })();
   }, []);
 
+  // Updated takePicture function
   const takePicture = async () => {
     console.log("Taking picture...");
     if (camera) {
       const photo = await camera.takePictureAsync();
-      uploadImage(photo.uri); // Pass the image URI to uploadImage function
+      setImage(photo.uri); // Store the taken image URI in the state
     }
   };
   
-  async function uploadImage(imageUri) { // Receive the image URI as a parameter
-    if (imageUri) { // Check if imageUri is provided
-      const res = await fetch(imageUri);
+  // Updated uploadImage function to use the stored image URI
+  const uploadImage = async () => {
+    if (image) { // Check if image is provided in the state
+      const res = await fetch(image);
       const blob = await res.blob();
       
       // Generate a unique file name using a timestamp
