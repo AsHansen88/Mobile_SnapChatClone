@@ -13,7 +13,7 @@ const StoriesScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "blue" }}>
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "white" }}>
             <Text>Story Screen</Text>
             <Button title="Logout" onPress={handleLogout} />
         </View>
